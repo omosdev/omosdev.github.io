@@ -34,16 +34,6 @@
     return date.toLocaleDateString('en-US', opts);
   }
 
-  function stripHtml(html) {
-    const div = document.createElement('div');
-    div.innerHTML = html;
-    return div.textContent || div.innerText || '';
-  }
-
-  function truncate(text, maxLength) {
-    if (text.length <= maxLength) return text;
-    return text.substring(0, maxLength).trimEnd() + '...';
-  }
 
   function renderPosts(items) {
     if (!feedContainer) return;
