@@ -26,8 +26,6 @@
 
   // --- Blog Feed ---
   const FEED_URL = 'https://omos.micro.blog/feed.json';
-  // Fallback for development when OMOS feed is empty
-  const FALLBACK_FEED_URL = 'https://accidentallyoldschool.com/feed.json';
   const feedContainer = document.getElementById('feed');
 
   function formatDate(dateString) {
@@ -56,17 +54,19 @@
     }
 
     feedContainer.innerHTML = items.map(function (item) {
-      const title = item.title || truncate(stripHtml(item.content_html), 80);
-      const summary = item.summary || truncate(stripHtml(item.content_html), 200);
+      const title = item.title || 'Untitled';
       const date = formatDate(item.date_published);
       const tags = (item.tags || []).map(function (t) {
         return '<span class="tag">' + t + '</span>';
       }).join(' ');
 
+      // Use the full HTML content as provided by the feed
+      const content = item.content_html || '';
+
       return '<article class="post-card">' +
         '<div class="post-card__date micro">' + date + (tags ? ' &middot; ' + tags : '') + '</div>' +
         '<a href="' + item.url + '" class="post-card__title" target="_blank" rel="noopener">' + title + '</a>' +
-        '<p class="post-card__summary">' + summary + '</p>' +
+        '<div class="post-card__content">' + content + '</div>' +
         '</article>';
     }).join('');
   }
@@ -77,12 +77,6 @@
     try {
       let response = await fetch(FEED_URL);
       let data = await response.json();
-
-      // If primary feed is empty, try fallback
-      if (!data.items || data.items.length === 0) {
-        response = await fetch(FALLBACK_FEED_URL);
-        data = await response.json();
-      }
 
       renderPosts(data.items);
     } catch (err) {

@@ -164,14 +164,27 @@ a:hover {
   margin-bottom: var(--space-sm);
 }
 
-.post-card__summary {
+.post-card__content {
+  margin-top: var(--space-sm);
   color: var(--text-secondary);
   font-size: 0.875rem;
-  margin-top: var(--space-sm);
-  display: -webkit-box;
-  -webkit-line-clamp: 3;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
+  line-height: var(--line-height-body);
+}
+
+.post-card__content p {
+  margin-bottom: var(--space-sm);
+}
+
+.post-card__content p:last-child {
+  margin-bottom: 0;
+}
+
+.post-card__content img {
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  margin: var(--space-md) 0;
+  border-radius: var(--radius);
 }
 
 /* Tags */
