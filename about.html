@@ -29,14 +29,19 @@
 </head>
 <body>
   <nav class="navbar">
+    <button class="navbar__hamburger" id="mobile-menu-toggle" aria-label="Toggle navigation menu" aria-expanded="false">
+      <span class="hamburger__line"></span>
+      <span class="hamburger__line"></span>
+      <span class="hamburger__line"></span>
+    </button>
     <a href="/" class="navbar__logo">OMOS</a>
-    <ul class="navbar__links">
+    <ul class="navbar__links" id="navbar-links">
       <li><a href="/">Home</a></li>
       <li><a href="/about.html" class="active">About</a></li>
       <li><a href="https://twitter.com/omosdev" target="_blank" rel="noopener">Twitter</a></li>
       <li><a href="https://www.youtube.com/@omosdev" target="_blank" rel="noopener">YouTube</a></li>
-      <li><button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme">light</button></li>
     </ul>
+    <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme">light</button>
   </nav>
 
   <main class="page-content">

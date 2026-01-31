@@ -24,6 +24,49 @@
     });
   }
 
+  // --- Mobile Navigation ---
+  const hamburgerBtn = document.getElementById('mobile-menu-toggle');
+  const navLinks = document.getElementById('navbar-links');
+
+  function toggleMobileMenu() {
+    const isOpen = navLinks.classList.contains('active');
+
+    navLinks.classList.toggle('active');
+    hamburgerBtn.classList.toggle('active');
+    hamburgerBtn.setAttribute('aria-expanded', !isOpen);
+  }
+
+  function closeMobileMenu() {
+    navLinks.classList.remove('active');
+    hamburgerBtn.classList.remove('active');
+    hamburgerBtn.setAttribute('aria-expanded', 'false');
+  }
+
+  if (hamburgerBtn && navLinks) {
+    hamburgerBtn.addEventListener('click', toggleMobileMenu);
+
+    // Close menu when clicking on a link
+    navLinks.addEventListener('click', function(e) {
+      if (e.target.tagName === 'A') {
+        closeMobileMenu();
+      }
+    });
+
+    // Close menu when clicking outside
+    document.addEventListener('click', function(e) {
+      if (!hamburgerBtn.contains(e.target) && !navLinks.contains(e.target)) {
+        closeMobileMenu();
+      }
+    });
+
+    // Close menu on escape key
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') {
+        closeMobileMenu();
+      }
+    });
+  }
+
   // --- Blog Feed ---
   const FEED_URL = 'https://omos.micro.blog/feed.json';
   const feedContainer = document.getElementById('feed');
